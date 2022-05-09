@@ -1,13 +1,10 @@
 package model;
 
-import exception.MissingRoleException;
-import exception.NameLengthException;
-import exception.PhoneNumberLengthException;
+
+import exception.MissingObjectException;
+import exception.StringLengthException;
 
 public class User {
-
-    private static final Integer nameMaxLength = 32;
-    private static final Integer phoneNumberLength = 15;
 
     private Integer id;
     private String userName;
@@ -16,8 +13,8 @@ public class User {
     private String firstName;
     private String phoneNumber;
 
-    public User(Integer id, String userName, Role role, String lastName, String firstName, String phoneNumber) throws NameLengthException, MissingRoleException, PhoneNumberLengthException {
-        this.id = id;
+    public User(Integer id, String userName, Role role, String lastName, String firstName, String phoneNumber) throws StringLengthException, MissingObjectException {
+        setId(id);
         setUserName(userName);
         setRole(role);
         setLastName(lastName);
@@ -29,45 +26,28 @@ public class User {
         this.id = id;
     }
 
-    public void setUserName(String userName) throws NameLengthException {
-        if (userName.length() >= 1 && userName.length() <= nameMaxLength) {
-            this.userName = userName;
-        } else {
-            throw new NameLengthException("userName", userName.length(), nameMaxLength);
-        }
+    public void setUserName(String userName) throws StringLengthException {
+       SecurityUtil.StringFormatTest("userName", userName.length(), SecurityUtil.stringSMaxLength, false);
+       this.userName = userName;
     }
 
-    public void setRole(Role role) throws MissingRoleException {
-        if (role != null) {
-            this.role = role;
-        } else {
-            throw new MissingRoleException();
-        }
-
+    public void setRole(Role role) throws MissingObjectException {
+        SecurityUtil.MissingObjectTest("Role", "User", role);
     }
 
-    public void setLastName(String lastName) throws NameLengthException {
-        if (lastName.length() >= 1 && lastName.length() <= nameMaxLength) {
-            this.lastName = lastName;
-        } else {
-            throw new NameLengthException("lastName", lastName.length(), nameMaxLength);
-        }
+    public void setLastName(String lastName) throws StringLengthException {
+        SecurityUtil.StringFormatTest("lastName", lastName.length(), SecurityUtil.stringSMaxLength, false);
+        this.lastName = lastName;
     }
 
-    public void setFirstName(String firstName) throws NameLengthException {
-        if (firstName.length() >= 1 && firstName.length() <= nameMaxLength) {
-            this.firstName = firstName;
-        } else {
-            throw new NameLengthException("firstName", firstName.length(), nameMaxLength);
-        }
+    public void setFirstName(String firstName) throws StringLengthException {
+        SecurityUtil.StringFormatTest("firstName", firstName.length(), SecurityUtil.stringSMaxLength, false);
+        this.firstName = firstName;
     }
 
-    public void setPhoneNumber(String phoneNumber) throws PhoneNumberLengthException {
-        if (phoneNumber.length() == phoneNumberLength) {
-            this.phoneNumber = phoneNumber;
-        } else {
-            throw new PhoneNumberLengthException(phoneNumber.length(), phoneNumberLength);
-        }
+    public void setPhoneNumber(String phoneNumber) throws StringLengthException {
+        SecurityUtil.StringFormatTest("phoneNumber", phoneNumber.length(), SecurityUtil.phoneNumberLength, true);
+        this.phoneNumber = phoneNumber;
     }
 
     public Integer getId() {
