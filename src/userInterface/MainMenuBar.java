@@ -16,8 +16,6 @@ public class MainMenuBar extends JMenuBar {
         accountMenu.setMnemonic('A');
         this.add(accountMenu);
 
-
-
         logoff = new JMenuItem("Log off");
         accountMenu.add(logoff);
 
