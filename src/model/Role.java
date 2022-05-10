@@ -1,22 +1,13 @@
 package model;
 
+import exception.SecurityUtil;
 import exception.StringLengthException;
 
 public class Role {
-    private Integer id;
     private String title;
 
-    public Role(Integer id, String title) throws StringLengthException {
-        setId(id);
+    public Role(String title) throws StringLengthException {
         setTitle(title);
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getTitle() {
@@ -26,5 +17,10 @@ public class Role {
     public void setTitle(String title) throws StringLengthException {
         SecurityUtil.StringFormatTest("title", title.length(), SecurityUtil.stringSMaxLength, false);
         this.title = title;
+    }
+
+    @Override
+    public String toString() {
+        return title;
     }
 }

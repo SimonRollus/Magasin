@@ -1,4 +1,4 @@
-package model;
+package exception;
 
 import exception.MissingObjectException;
 import exception.StringLengthException;
@@ -11,7 +11,7 @@ public class SecurityUtil {
     public static final Integer stringXLMaxLength = 256;
 
 
-    public static final Integer phoneNumberLength = 15;
+    public static final Integer phoneNumberLength = 12;
     public static final Integer postalCodeLength = 4;
 
     public static void StringFormatTest(String stringInvolved, Integer stringCurrentLength, Integer stringLengthLimit, boolean format) throws StringLengthException {

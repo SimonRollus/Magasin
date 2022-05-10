@@ -10,11 +10,11 @@ public class SingletonConnection {
 
     private SingletonConnection(){}
 
-    public Connection getInstance() throws SQLException{
+    public static Connection getInstance() throws SQLException{
         if (uniqueConnection == null)
                 uniqueConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/magasin",
                         "root",
-                        "tonmotdepasse");
+                        "Mrsimon260??root;):)");
 
             return uniqueConnection;
     }

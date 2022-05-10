@@ -1,6 +1,7 @@
 package model;
 
 import exception.MissingObjectException;
+import exception.SecurityUtil;
 
 public class OrderLine {
     private Integer id;

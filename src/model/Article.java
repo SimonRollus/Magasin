@@ -1,6 +1,7 @@
 package model;
 
 import exception.MissingObjectException;
+import exception.SecurityUtil;
 import exception.StringLengthException;
 
 public class Article {

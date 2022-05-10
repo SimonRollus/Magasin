@@ -2,21 +2,24 @@ package model;
 
 
 import exception.MissingObjectException;
+import exception.SecurityUtil;
 import exception.StringLengthException;
 
 public class User {
 
     private Integer id;
-    private String userName;
+    private String username;
     private Role role;
+    private String password;
     private String lastName;
     private String firstName;
     private String phoneNumber;
 
-    public User(Integer id, String userName, Role role, String lastName, String firstName, String phoneNumber) throws StringLengthException, MissingObjectException {
+    public User(Integer id, String username, Role role, String password,String lastName, String firstName, String phoneNumber) throws StringLengthException, MissingObjectException {
         setId(id);
-        setUserName(userName);
+        setUsername(username);
         setRole(role);
+        setPassword(password);
         setLastName(lastName);
         setFirstName(firstName);
         setPhoneNumber(phoneNumber);
@@ -26,13 +29,19 @@ public class User {
         this.id = id;
     }
 
-    public void setUserName(String userName) throws StringLengthException {
-       SecurityUtil.StringFormatTest("userName", userName.length(), SecurityUtil.stringSMaxLength, false);
-       this.userName = userName;
+    public void setUsername(String username) throws StringLengthException {
+       SecurityUtil.StringFormatTest("userName", username.length(), SecurityUtil.stringSMaxLength, false);
+       this.username = username;
+    }
+
+    public void setPassword(String password) throws StringLengthException {
+        SecurityUtil.StringFormatTest("password", password.length(), SecurityUtil.stringLMaxLength, false);
+        this.password = password;
     }
 
     public void setRole(Role role) throws MissingObjectException {
         SecurityUtil.MissingObjectTest("Role", "User", role);
+        this.role = role;
     }
 
     public void setLastName(String lastName) throws StringLengthException {
@@ -55,11 +64,15 @@ public class User {
     }
 
     public String getUsername() {
-        return userName;
+        return username;
     }
 
     public Role getRole() {
         return role;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public String getLastName() {
@@ -72,5 +85,18 @@ public class User {
 
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", role=" + role +
+                ", password='" + password + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                '}';
     }
 }
