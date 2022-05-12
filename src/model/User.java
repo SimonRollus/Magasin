@@ -2,73 +2,68 @@ package model;
 
 
 import exception.MissingObjectException;
-import exception.SecurityUtil;
 import exception.StringLengthException;
+import utilitary.Security;
 
-public class User {
+import java.util.ArrayList;
 
-    private Integer id;
+public class User extends MagasinObjet {
     private String username;
-    private Role role;
+    private Integer roleID;
     private String password;
     private String lastName;
     private String firstName;
     private String phoneNumber;
 
-    public User(Integer id, String username, Role role, String password,String lastName, String firstName, String phoneNumber) throws StringLengthException, MissingObjectException {
-        setId(id);
+    private static ArrayList<Integer> idAlreadyExisting = new ArrayList<>();
+
+    public User(Integer id, String username, Integer roleID, String password,String lastName, String firstName, String phoneNumber) throws StringLengthException, MissingObjectException {
+        super(id);
         setUsername(username);
-        setRole(role);
+        setRoleID(roleID);
         setPassword(password);
         setLastName(lastName);
         setFirstName(firstName);
         setPhoneNumber(phoneNumber);
     }
     
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public void setUsername(String username) throws StringLengthException {
-       SecurityUtil.StringFormatTest("userName", username.length(), SecurityUtil.stringSMaxLength, false);
+        Security.StringFormatTest("userName", username.length(), Security.stringSMaxLength, false);
        this.username = username;
     }
 
     public void setPassword(String password) throws StringLengthException {
-        SecurityUtil.StringFormatTest("password", password.length(), SecurityUtil.stringLMaxLength, false);
+        Security.StringFormatTest("password", password.length(), Security.stringLMaxLength, false);
         this.password = password;
     }
 
-    public void setRole(Role role) throws MissingObjectException {
-        SecurityUtil.MissingObjectTest("Role", "User", role);
-        this.role = role;
+    public void setRoleID(Integer roleID) throws MissingObjectException {
+        Security.MissingObjectTest("Role", "User", roleID);
+        this.roleID = roleID;
     }
 
     public void setLastName(String lastName) throws StringLengthException {
-        SecurityUtil.StringFormatTest("lastName", lastName.length(), SecurityUtil.stringSMaxLength, false);
+        Security.StringFormatTest("lastName", lastName.length(), Security.stringSMaxLength, false);
         this.lastName = lastName;
     }
 
     public void setFirstName(String firstName) throws StringLengthException {
-        SecurityUtil.StringFormatTest("firstName", firstName.length(), SecurityUtil.stringSMaxLength, false);
+        Security.StringFormatTest("firstName", firstName.length(), Security.stringSMaxLength, false);
         this.firstName = firstName;
     }
 
     public void setPhoneNumber(String phoneNumber) throws StringLengthException {
-        SecurityUtil.StringFormatTest("phoneNumber", phoneNumber.length(), SecurityUtil.phoneNumberLength, true);
+        Security.StringFormatTest("phoneNumber", phoneNumber.length(), Security.phoneNumberLength, true);
         this.phoneNumber = phoneNumber;
-    }
-
-    public Integer getId() {
-        return id;
     }
 
     public String getUsername() {
         return username;
     }
 
-    public Role getRole() {
-        return role;
+    public Integer getRoleID() {
+        return roleID;
     }
 
     public String getPassword() {
@@ -90,9 +85,9 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "id=" + getId() +
                 ", username='" + username + '\'' +
-                ", role=" + role +
+                ", role=" + roleID +
                 ", password='" + password + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", firstName='" + firstName + '\'' +

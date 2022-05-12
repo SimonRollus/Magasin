@@ -1,30 +1,23 @@
 package model;
 
 import exception.MissingObjectException;
-import exception.SecurityUtil;
 import exception.StringLengthException;
+import utilitary.Security;
 
-public class Article {
-    private Integer id;
+import java.util.ArrayList;
+
+public class Article extends MagasinObjet {
     private String label;
     private Integer availableQuantity;
     private String description;
-    private Category category;
+    private Integer categoryID;
 
-    public Article(Integer id, String label, Integer availableQuantity, String description, Category category) throws StringLengthException, MissingObjectException {
-        this.id = id;
+    public Article(Integer id, String label, Integer availableQuantity, String description, Integer categoryID) throws StringLengthException, MissingObjectException {
+        super(id);
         setLabel(label);
         this.availableQuantity = availableQuantity;
         setDescription(description);
-        setCategory(category);
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
+        setCategoryID(categoryID);
     }
 
     public String getLabel() {
@@ -32,7 +25,7 @@ public class Article {
     }
 
     public void setLabel(String label) throws StringLengthException{
-        SecurityUtil.StringFormatTest("label", label.length(), SecurityUtil.stringLMaxLength, false);
+        Security.StringFormatTest("label", label.length(), Security.stringLMaxLength, false);
         this.label = label;
     }
 
@@ -49,15 +42,16 @@ public class Article {
     }
 
     public void setDescription(String description) throws StringLengthException {
-        SecurityUtil.StringFormatTest("description", description.length(), SecurityUtil.stringLMaxLength, false);
+        Security.StringFormatTest("description", description.length(), Security.stringLMaxLength, false);
         this.description = description;
     }
 
-    public Category getCategory() {
-        return category;
+    public Integer getCategoryID() {
+        return categoryID;
     }
 
-    public void setCategory(Category category) throws MissingObjectException{
-        SecurityUtil.MissingObjectTest("Category", "Article", category);
+    public void setCategoryID(Integer categoryID) throws MissingObjectException{
+        Security.MissingObjectTest("CategoryID", "Article", categoryID);
+        this.categoryID = categoryID;
     }
 }

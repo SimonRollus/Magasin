@@ -1,12 +1,16 @@
 package model;
 
-import exception.SecurityUtil;
+import exception.MissingObjectException;
 import exception.StringLengthException;
+import utilitary.Security;
 
-public class Category {
+import java.util.ArrayList;
+
+public class Category extends MagasinObjet {
     private String label;
 
-    public Category(String label) throws StringLengthException {
+    public Category(Integer id, String label) throws StringLengthException, MissingObjectException {
+        super(id);
         setLabel(label);
     }
 
@@ -15,7 +19,7 @@ public class Category {
     }
 
     public void setLabel(String label) throws StringLengthException {
-        SecurityUtil.StringFormatTest("label", label.length(), SecurityUtil.stringMMaxLength, false);
+        Security.StringFormatTest("label", label.length(), Security.stringMMaxLength, false);
         this.label = label;
     }
 

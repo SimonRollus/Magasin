@@ -1,40 +1,32 @@
 package model;
 
 import exception.MissingObjectException;
-import exception.SecurityUtil;
 import exception.StringLengthException;
+import utilitary.Security;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
-public class Order {
-    private Integer id;
+public class Order extends MagasinObjet {
     private LocalDateTime dateTimeCompletion;
     private LocalDateTime dateTimeDelivery;
     private boolean isComplete;
     private String note;
-    private User employee;
-    private User user;
-    private Address address;
-    private Status status;
+    private Integer employeeID;
+    private Integer userID;
+    private Integer addressID;
+    private Integer statusID;
 
-    public Order(Integer id, LocalDateTime dateTimeCompletion, LocalDateTime dateTimeDelivery, boolean isComplete, String note, User employee, User user, Address address, Status status) throws StringLengthException, MissingObjectException {
-        setId(id);
+    public Order(Integer id, LocalDateTime dateTimeCompletion, LocalDateTime dateTimeDelivery, boolean isComplete, String note, Integer employeeID, Integer userID, Integer addressID, Integer statusID) throws StringLengthException, MissingObjectException {
+       super(id);
         setDateTimeCompletion(dateTimeCompletion);
         setDateTimeDelivery(dateTimeDelivery);
         setComplete(isComplete);
         setNote(note);
-        setEmployee(employee);
-        setUser(user);
-        setAddress(address);
-        setStatus(status);
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
+        setEmployeeID(employeeID);
+        setUserID(userID);
+        setAddressID(addressID);
+        setStatusID(statusID);
     }
 
     public LocalDateTime getDateTimeCompletion() {
@@ -66,39 +58,39 @@ public class Order {
     }
 
     public void setNote(String note) throws StringLengthException {
-        SecurityUtil.StringFormatTest("note", note.length(), SecurityUtil.stringXLMaxLength, false);
+        Security.StringFormatTest("note", note.length(), Security.stringXLMaxLength, false);
         this.note = note;
     }
 
-    public User getEmployee() {
-        return employee;
+    public Integer getEmployeeID() {
+        return employeeID;
     }
 
-    public void setEmployee(User employee) {
-        this.employee = employee;
+    public void setEmployeeID(Integer employee) {
+        this.employeeID = employeeID;
     }
 
-    public User getUser() {
-        return user;
+    public Integer getUserID() {
+        return userID;
     }
 
-    public void setUser(User user) throws MissingObjectException {
-        SecurityUtil.MissingObjectTest("User", "Order", user);
+    public void setUserID(Integer user) throws MissingObjectException {
+        Security.MissingObjectTest("User", "Order", user);
     }
 
-    public Address getAddress() {
-        return address;
+    public Integer getAddressID() {
+        return addressID;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setAddressID(Integer address) {
+        this.addressID = addressID;
     }
 
-    public Status getStatus() {
-        return status;
+    public Integer getStatusID() {
+        return statusID;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setStatusID(Integer status) {
+        this.statusID = statusID;
     }
 }

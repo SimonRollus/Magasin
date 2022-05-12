@@ -1,43 +1,38 @@
 package model;
 
 import exception.MissingObjectException;
-import exception.SecurityUtil;
+import utilitary.Security;
 
-public class OrderLine {
-    private Integer id;
-    private Order order;
-    private Article article;
+import java.util.ArrayList;
+
+public class OrderLine extends MagasinObjet {
+    private Integer orderID;
+    private Integer articleID;
     private Integer quantity;
 
-    public OrderLine(Integer id, Order order, Article article, Integer quantity) throws MissingObjectException {
-        setId(id);
-        setOrder(order);
-        setArticle(article);
+
+
+    public OrderLine(Integer id, Integer orderID, Integer articleID, Integer quantity) throws MissingObjectException {
+        super(id);
+        setOrderID(orderID);
+        setArticle(articleID);
         setQuantity(quantity);
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getOrderID() {
+        return orderID;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setOrderID(Integer orderID) throws MissingObjectException{
+        Security.MissingObjectTest("orderID", "OrderLine", orderID);
     }
 
-    public Order getOrder() {
-        return order;
+    public Integer getArticleID() {
+        return articleID;
     }
 
-    public void setOrder(Order order) throws MissingObjectException{
-        SecurityUtil.MissingObjectTest("Order", "OrderLine", order);
-    }
-
-    public Article getArticle() {
-        return article;
-    }
-
-    public void setArticle(Article article) throws MissingObjectException{
-        SecurityUtil.MissingObjectTest("Article", "OrderLine", article);
+    public void setArticle(Integer article) throws MissingObjectException{
+        Security.MissingObjectTest("article", "OrderLine", article);
     }
 
     public Integer getQuantity() {

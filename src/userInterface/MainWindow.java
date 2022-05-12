@@ -2,13 +2,15 @@ package userInterface;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.HashMap;
 
 public class MainWindow extends JFrame {
 
     private Container frameContainer;
+    private HashMap<String, JPanel> panels;
     private JPanel currentPanel;
 
-    public MainWindow(){
+    public MainWindow(String defaultPanelName){
 
         super("Magasin");
         setBounds(100, 100, 1500, 800);
@@ -17,13 +19,30 @@ public class MainWindow extends JFrame {
 
         frameContainer.setLayout(new BorderLayout());
 
-        MainMenuBar menu = new MainMenuBar();
+        MainMenuBar menu = new MainMenuBar(this);
         setJMenuBar(menu);
 
-        currentPanel = new TrackPanel();
+        panels = new HashMap<>();
 
-        frameContainer.add(currentPanel, BorderLayout.CENTER);
+        panels.put("Manage", new ManagePanel());
+        panels.put("Track", new TrackPanel());
+        panels.put("Stock", new StockPanel());
+
+        setCurrentPanel(defaultPanelName);
 
         this.setVisible(true);
+    }
+
+    public void setCurrentPanel(String panelName) {
+        if (panels.containsKey(panelName)) {
+            System.out.println("Hello tu es dans MainWindow + currentPanel = " + panelName);
+            if (currentPanel != null)
+                frameContainer.remove(currentPanel);
+
+            currentPanel = panels.get(panelName);
+            frameContainer.add(currentPanel);
+            frameContainer.repaint();
+            this.setVisible(true);
+        }
     }
 }

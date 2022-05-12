@@ -2,15 +2,15 @@ package exception;
 
 public class MissingObjectException extends Exception {
 
-    private String objectInvolved;
+    private String valueInvolved;
     private String classInvolved;
 
-    public MissingObjectException(String objectInvolved, String classInvolved) {
-        this.objectInvolved = objectInvolved;
+    public MissingObjectException(String valueInvolved, String classInvolved) {
+        this.valueInvolved = valueInvolved;
         this.classInvolved = classInvolved;
     }
 
     public String getMessage() {
-        return "An instance ";
+        return valueInvolved + "is missing in " + classInvolved;
     }
 }

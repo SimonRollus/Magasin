@@ -1,12 +1,16 @@
 package model;
 
-import exception.SecurityUtil;
+import exception.MissingObjectException;
 import exception.StringLengthException;
+import utilitary.Security;
 
-public class Role {
+import java.util.ArrayList;
+
+public class Role extends MagasinObjet {
     private String title;
 
-    public Role(String title) throws StringLengthException {
+    public Role(Integer id, String title) throws StringLengthException, MissingObjectException {
+        super(id);
         setTitle(title);
     }
 
@@ -15,7 +19,7 @@ public class Role {
     }
 
     public void setTitle(String title) throws StringLengthException {
-        SecurityUtil.StringFormatTest("title", title.length(), SecurityUtil.stringSMaxLength, false);
+        Security.StringFormatTest("title", title.length(), Security.stringSMaxLength, false);
         this.title = title;
     }
 
