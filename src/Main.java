@@ -1,12 +1,27 @@
 import dataAccess.SQLOperationUsers;
 import model.User;
+import userInterface.LoginWindow;
 import userInterface.MainWindow;
+
+import java.awt.*;
 
 public class Main {
     public static void main(String[] args) {
 
-        //MainWindow mainWindow = new MainWindow("Stock");
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    LoginWindow frame = new LoginWindow();
+                    frame.setVisible(true);
+                    }
+                catch (Exception e) {
+                    e.printStackTrace();
+                    }
+                }
+            }
+        );
 
+      // MainWindow mainWindow = new MainWindow("Stock");
 
 
         try {

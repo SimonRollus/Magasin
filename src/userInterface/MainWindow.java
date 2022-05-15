@@ -6,13 +6,14 @@ import java.util.HashMap;
 
 public class MainWindow extends JFrame {
 
-    private Container frameContainer;
-    private HashMap<String, JPanel> panels;
+    final private Container frameContainer;
+    final private HashMap<String, JPanel> panels;
     private JPanel currentPanel;
 
     public MainWindow(String defaultPanelName){
 
         super("Magasin");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1500, 800);
 
         frameContainer = this.getContentPane();

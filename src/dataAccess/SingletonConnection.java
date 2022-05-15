@@ -14,7 +14,7 @@ public class SingletonConnection {
         if (uniqueConnection == null)
                 uniqueConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/magasin",
                         "root",
-                        "Mrsimon260??root;):)");
+                        "Mrsimon260??root;):)"); // Change with the host
 
             return uniqueConnection;
     }
